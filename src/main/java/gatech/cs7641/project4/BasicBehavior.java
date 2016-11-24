@@ -62,6 +62,7 @@ public class BasicBehavior {
 	HashableStateFactory hashingFactory;
 	SimulatedEnvironment env;
 	
+	// Default to 11x11.
 	public static int WIDTH = 11;
 	public static int HEIGHT = 11;
 
@@ -263,6 +264,37 @@ public class BasicBehavior {
 		exp.writeStepAndEpisodeDataToCSV("expData");
 	}
 
+	public static void runExample(boolean isPolicyIteration, int w, int h) {
+		// Set width/height statically.
+		WIDTH = w;
+		HEIGHT = h;
+		
+		// Create grid world.
+		System.out.println("BasicBehavior.runExample starting...");
+		BasicBehavior example = new BasicBehavior();
+		String outputPath = "output/";
+
+		// Run iteration.
+		String iterationType = isPolicyIteration ? "policy iteration" : "value iteration" ;
+		System.out.println("Running " + iterationType + " example...");
+		if(isPolicyIteration) {
+			example.policyIterationExample(outputPath);
+		} else {
+			example.valueIterationExample(outputPath);			
+		}
+		
+		// Plot data.
+		System.out.println("Starting plotter...");
+		example.experimentAndPlotter();
+		System.out.println("Finished plotter.");
+
+		// Visualize world.
+		System.out.println("Visualizing example...");
+		example.visualize(outputPath);
+		System.out.println("BasicBehavior.runExample finished.");
+	}
+	
+	/*
 	public static void main(String[] args) {
 		System.out.println("BasicBehavior.java starting...");
 		BasicBehavior example = new BasicBehavior();
@@ -285,4 +317,5 @@ public class BasicBehavior {
 		example.visualize(outputPath);
 		System.out.println("BasicBehavior.java finished.");
 	}
+	*/
 }
