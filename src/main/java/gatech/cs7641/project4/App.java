@@ -12,10 +12,10 @@ public class App
     	//BasicBehavior.runExample(false, true);
     	
     	// Small case with policy iteration.
-    	BasicBehavior.runExample(true, true);
+    	//BasicBehavior.runExample(true, true);
     	
     	// Large case with value iteration.
-       	//BasicBehavior.runExample(false, false);
+       	BasicBehavior.runExample(false, false);
        	
        	// Large case with policy iteration.
     	//BasicBehavior.runExample(true, false);

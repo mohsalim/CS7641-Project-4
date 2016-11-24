@@ -38,23 +38,51 @@ public class SalimGridWorldDomain extends GridWorldDomain {
 		this.height = largeCaseDimension;
 		this.makeEmptyMap();
 		
-		horizontalWall(0, 0, 5);
-		horizontalWall(2, 4, 5);
-		horizontalWall(6, 7, 4);
-		horizontalWall(9, 10, 4);
+		// Allow a straight path that almost gets to goal, but then blocks off.
+		horizontalWall(1, this.width - 2, 1);
+		verticalWall(1, this.height - 2, this.width - 2);
+		horizontalWall(this.width - 1, this.width - 1, this.height - 2);
+		
+		// Insert an assortment of L-blocks such that it's difficult for the agent to go directly to the goal.
+		int degrees = 0;
+		for(int x = 1; x < this.width - 3; x += 3) {
+			for(int y = 2; y < this.height - 3; y += 4) {
+				insertLBlock(x, y, degrees);
+				degrees = degrees >= 270 ? 0 : degrees + 90;
+			}
+			// Add more variety.
+			//degrees = degrees >= 270 ? 0 : degrees + 90;
+		}
+		
+		// Add one last horizontal at top such that the agent is forced to go around.
+		horizontalWall(1, this.width - 2, this.height - 2);
+	}
 
-		horizontalWall(0, 0, 10);
-		horizontalWall(2, 4, 10);
-		horizontalWall(6, 7, 9);
-		horizontalWall(9, 10, 9);
-		
-		verticalWall(0, 0, 5);
-		verticalWall(2, 7, 5);
-		verticalWall(9, 10, 5);
-		
-		verticalWall(0, 0, 10);
-		verticalWall(2, 7, 10);
-		verticalWall(9, 10, 10);
+	protected void insertLBlock(int x, int y, int angle) {
+		// Rotate on bottom left corner of the L.
+		// |
+		// |
+		// |_
+		switch(angle) {
+			case 0:
+				verticalWall(y, y + 2, x);
+				horizontalWall(x + 1, x + 1, y);
+				return;
+			case 90:
+				verticalWall(y + 1, y + 1, x);
+				horizontalWall(x, x + 2, y);
+				return;
+			case 180:
+				verticalWall(y, y + 2, x);
+				horizontalWall(x - 1, x - 1, y);
+				return;
+			case 270:
+				verticalWall(y - 1, y - 1, x);
+				horizontalWall(x, x + 2, y);
+				return;
+			default:
+				System.out.println("Invalid angle " + angle);
+		}
 	}
 	
 	public static int getDimension(boolean isSmallCase) {

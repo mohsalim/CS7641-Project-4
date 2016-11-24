@@ -254,6 +254,8 @@ public class BasicBehavior {
 			}
 		};
 
+		// Sarsa-Leaner is way too slow. I only need one reinforcement learner for this project, and Q-Learner does the job.
+		/*
 		LearningAgentFactory sarsaLearningFactory = new LearningAgentFactory() {
 			public String getAgentName() {
 				return "SARSA";
@@ -263,8 +265,11 @@ public class BasicBehavior {
 				return new SarsaLam(domain, 0.99, hashingFactory, 0.0, 0.1, 1.);
 			}
 		};
-
+		
 		LearningAlgorithmExperimenter exp = new LearningAlgorithmExperimenter(env, 10, 100, qLearningFactory, sarsaLearningFactory);
+		*/
+		
+		LearningAlgorithmExperimenter exp = new LearningAlgorithmExperimenter(env, 10, 100, qLearningFactory);
 		exp.setUpPlottingConfiguration(500, 250, 2, 1000,
 				TrialMode.MOST_RECENT_AND_AVERAGE,
 				PerformanceMetric.CUMULATIVE_STEPS_PER_EPISODE,
