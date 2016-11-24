@@ -31,6 +31,7 @@ import burlap.behavior.valuefunction.ValueFunction;
 import burlap.domain.singleagent.gridworld.GridWorldDomain;
 import burlap.domain.singleagent.gridworld.GridWorldTerminalFunction;
 import burlap.domain.singleagent.gridworld.GridWorldVisualizer;
+import burlap.domain.singleagent.gridworld.SalimGridWorldDomain;
 import burlap.domain.singleagent.gridworld.state.GridAgent;
 import burlap.domain.singleagent.gridworld.state.GridLocation;
 import burlap.domain.singleagent.gridworld.state.GridWorldState;
@@ -62,13 +63,22 @@ public class BasicBehavior {
 	HashableStateFactory hashingFactory;
 	SimulatedEnvironment env;
 	
-	// Default to 11x11.
-	public static int WIDTH = 11;
-	public static int HEIGHT = 11;
+	// Default to 4x4.
+	public static int WIDTH = 4;
+	public static int HEIGHT = 4;
 
-	public BasicBehavior(){
-		gwdg = new GridWorldDomain(WIDTH, HEIGHT);
-		gwdg.setMapToFourRooms();
+	public BasicBehavior(boolean isSmallCase){
+		int dimension = SalimGridWorldDomain.getDimension(isSmallCase);
+		WIDTH = dimension;
+		HEIGHT = dimension;
+		gwdg = new SalimGridWorldDomain(WIDTH, HEIGHT);
+		
+		if(isSmallCase) {
+			((SalimGridWorldDomain)gwdg).setSmallCase();
+		} else {
+			((SalimGridWorldDomain)gwdg).setLargeCase();			
+		}
+		
 		tf = new GridWorldTerminalFunction(WIDTH - 1, HEIGHT - 1);
 		gwdg.setTf(tf);
 		goalCondition = new TFGoalCondition(tf);
@@ -228,7 +238,7 @@ public class BasicBehavior {
 	}
 
 	public void experimentAndPlotter(){
-		//different reward function for more structured performance plots
+		// Different reward function for more structured performance plots.
 		((FactoredModel)domain.getModel()).setRf(new GoalBasedRF(this.goalCondition, 5.0, -0.1));
 
 		/**
@@ -264,14 +274,11 @@ public class BasicBehavior {
 		exp.writeStepAndEpisodeDataToCSV("expData");
 	}
 
-	public static void runExample(boolean isPolicyIteration, int w, int h) {
-		// Set width/height statically.
-		WIDTH = w;
-		HEIGHT = h;
-		
+	public static void runExample(boolean isPolicyIteration, boolean isSmallCase) {
 		// Create grid world.
-		System.out.println("BasicBehavior.runExample starting...");
-		BasicBehavior example = new BasicBehavior();
+		String smallCaseStr = isSmallCase ? "small case" : "large case";
+		System.out.println("BasicBehavior.runExample " + smallCaseStr + " starting...");
+		BasicBehavior example = new BasicBehavior(isSmallCase);
 		String outputPath = "output/";
 
 		// Run iteration.

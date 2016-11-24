@@ -9,17 +9,17 @@ public class App
     public static void main( String[] args )
     {
     	// Small case with value iteration.
-    	BasicBehavior.runExample(false, 4, 4);
+    	//BasicBehavior.runExample(false, true);
     	
     	// Small case with policy iteration.
-    	BasicBehavior.runExample(true, 4, 4);
+    	BasicBehavior.runExample(true, true);
     	
     	// Large case with value iteration.
-       	BasicBehavior.runExample(false, 11, 11);
+       	//BasicBehavior.runExample(false, false);
        	
        	// Large case with policy iteration.
-    	BasicBehavior.runExample(true, 11, 11);
-
+    	//BasicBehavior.runExample(true, false);
+    	
     	//HelloGridWorld.run();
     	//PlotTest.run();
     	
