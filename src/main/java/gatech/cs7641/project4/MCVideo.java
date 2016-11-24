@@ -14,7 +14,7 @@ import burlap.mdp.singleagent.environment.SimulatedEnvironment;
 import burlap.mdp.singleagent.environment.extensions.EnvironmentServer;
 import burlap.visualizer.Visualizer;
 
-public class MountainCarExample {
+public class MCVideo {
 	public static void run() {
 		// Create mountain car problem with default parameters.
 		MountainCar mcGen = new MountainCar();

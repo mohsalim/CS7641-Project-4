@@ -8,7 +8,15 @@ public class App
 {
     public static void main( String[] args )
     {
-    	//GridGameExample.run();
-    	MountainCarExample.run();
+    	//HelloGridWorld.run();
+    	//PlotTest.run();
+    	
+    	MCVideo.run();
+    	
+    	// Grid game examples. (Choose one).
+    	//GridGameExample.VICoCoTest();
+		//GridGameExample.VICorrelatedTest();
+		//GridGameExample.QLCoCoTest();
+		//GridGameExample.saInterface();
     }
 }
