@@ -50,4 +50,8 @@ public class MCVideo {
 
 		System.out.println("Finished"); 
 	}
+	
+//	public static void main(String[] args) {
+//		run();
+//	}
 }

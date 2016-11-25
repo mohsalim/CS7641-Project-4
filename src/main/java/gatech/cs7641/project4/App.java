@@ -9,16 +9,22 @@ public class App
     public static void main( String[] args )
     {
     	// Small case with value iteration.
-    	//BasicBehavior.runExample(false, true);
+    	BasicBehavior.runExample(ReinforcementLearnerType.ValueIteration, true);
     	
     	// Small case with policy iteration.
-    	//BasicBehavior.runExample(true, true);
+    	BasicBehavior.runExample(ReinforcementLearnerType.PolicyIteration, true);
+
+    	// Small case with q-learner.
+    	BasicBehavior.runExample(ReinforcementLearnerType.QLearner, true);
     	
     	// Large case with value iteration.
-       	BasicBehavior.runExample(false, false);
+    	BasicBehavior.runExample(ReinforcementLearnerType.ValueIteration, false);
        	
        	// Large case with policy iteration.
-    	//BasicBehavior.runExample(true, false);
+    	BasicBehavior.runExample(ReinforcementLearnerType.PolicyIteration, false);
+    	
+    	// Large case with q-learner.
+    	BasicBehavior.runExample(ReinforcementLearnerType.QLearner, false);
     	
     	//HelloGridWorld.run();
     	//PlotTest.run();

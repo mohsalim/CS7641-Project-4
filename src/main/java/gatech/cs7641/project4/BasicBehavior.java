@@ -88,7 +88,7 @@ public class BasicBehavior {
 		hashingFactory = new SimpleHashableStateFactory();
 
 		env = new SimulatedEnvironment(domain, initialState);
-
+		
 		//VisualActionObserver observer = new VisualActionObserver(domain, GridWorldVisualizer.getVisualizer(gwdg.getMap()));
 		//observer.initGUI();
 		//env.addObservers(observer);
@@ -149,7 +149,7 @@ public class BasicBehavior {
 		Policy p = planner.planFromState(initialState);
 
 		System.out.println("Policy iteration example rollout starting...");
-		PolicyUtils.rollout(p, initialState, domain.getModel()).write(outputPath + "vi");
+		PolicyUtils.rollout(p, initialState, domain.getModel()).write(outputPath + "pi");
 		System.out.println("Policy iteration example rollout complete.");
 
 		simpleValueFunctionVis((ValueFunction)planner, p);
@@ -279,20 +279,30 @@ public class BasicBehavior {
 		exp.writeStepAndEpisodeDataToCSV("expData");
 	}
 
-	public static void runExample(boolean isPolicyIteration, boolean isSmallCase) {
+	public static void runExample(ReinforcementLearnerType riType, boolean isSmallCase) {
 		// Create grid world.
 		String smallCaseStr = isSmallCase ? "small case" : "large case";
 		System.out.println("BasicBehavior.runExample " + smallCaseStr + " starting...");
 		BasicBehavior example = new BasicBehavior(isSmallCase);
 		String outputPath = "output/";
 
-		// Run iteration.
-		String iterationType = isPolicyIteration ? "policy iteration" : "value iteration" ;
-		System.out.println("Running " + iterationType + " example...");
-		if(isPolicyIteration) {
+		// Run iteration.		
+		switch(riType) {
+		case PolicyIteration:
+			System.out.println("Running policy iteration example...");
 			example.policyIterationExample(outputPath);
-		} else {
+			break;
+		case ValueIteration:
+			System.out.println("Running value iteration example...");
 			example.valueIterationExample(outputPath);			
+			break;
+		case QLearner:
+			System.out.println("Running q-learner example...");
+			example.qLearningExample(outputPath);
+			break;
+		default:
+			System.out.print("Invalid ReinforcementLearnerType: " + riType);
+			return;
 		}
 		
 		// Plot data.
@@ -306,10 +316,10 @@ public class BasicBehavior {
 		System.out.println("BasicBehavior.runExample finished.");
 	}
 	
-	/*
+	
 	public static void main(String[] args) {
 		System.out.println("BasicBehavior.java starting...");
-		BasicBehavior example = new BasicBehavior();
+		BasicBehavior example = new BasicBehavior(false);
 		String outputPath = "output/";
 
 		System.out.println("Running example...");
@@ -317,8 +327,8 @@ public class BasicBehavior {
 		//example.DFSExample(outputPath);
 		//example.AStarExample(outputPath);
 		//example.valueIterationExample(outputPath);
-		example.policyIterationExample(outputPath);
-		//example.qLearningExample(outputPath);
+		//example.policyIterationExample(outputPath);
+		example.qLearningExample(outputPath);
 		//example.sarsaLearningExample(outputPath);
 
 		System.out.println("Starting plotter...");
@@ -329,5 +339,5 @@ public class BasicBehavior {
 		example.visualize(outputPath);
 		System.out.println("BasicBehavior.java finished.");
 	}
-	*/
+	
 }
