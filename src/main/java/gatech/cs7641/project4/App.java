@@ -8,23 +8,24 @@ public class App
 {
     public static void main( String[] args )
     {
+    	// TODO can only run 1 per main run. I think I need to reset environment in between.
     	// Small case with value iteration.
-    	BasicBehavior.runExample(ReinforcementLearnerType.ValueIteration, true);
+    	//BasicBehavior.runExample(ReinforcementLearnerType.ValueIteration, true);
     	
     	// Small case with policy iteration.
-    	BasicBehavior.runExample(ReinforcementLearnerType.PolicyIteration, true);
+    	//BasicBehavior.runExample(ReinforcementLearnerType.PolicyIteration, true);
 
     	// Small case with q-learner.
-    	BasicBehavior.runExample(ReinforcementLearnerType.QLearner, true);
+    	//BasicBehavior.runExample(ReinforcementLearnerType.QLearner, true);
     	
     	// Large case with value iteration.
     	BasicBehavior.runExample(ReinforcementLearnerType.ValueIteration, false);
        	
        	// Large case with policy iteration.
-    	BasicBehavior.runExample(ReinforcementLearnerType.PolicyIteration, false);
+    	//BasicBehavior.runExample(ReinforcementLearnerType.PolicyIteration, false);
     	
     	// Large case with q-learner.
-    	BasicBehavior.runExample(ReinforcementLearnerType.QLearner, false);
+    	//BasicBehavior.runExample(ReinforcementLearnerType.QLearner, false);
     	
     	//HelloGridWorld.run();
     	//PlotTest.run();

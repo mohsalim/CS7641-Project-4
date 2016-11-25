@@ -3,6 +3,7 @@
 	<name>project4</name>
 	<comment></comment>
 	<projects>
+		<project>juanjose49-burlap</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -49,6 +49,7 @@ import burlap.statehashing.simple.SimpleHashableStateFactory;
 import burlap.visualizer.Visualizer;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -79,6 +80,9 @@ public class BasicBehavior {
 			((SalimGridWorldDomain)gwdg).setLargeCase();			
 		}
 		
+		prettyPrintMap(gwdg.getMap());
+
+		
 		tf = new GridWorldTerminalFunction(WIDTH - 1, HEIGHT - 1);
 		gwdg.setTf(tf);
 		goalCondition = new TFGoalCondition(tf);
@@ -92,6 +96,32 @@ public class BasicBehavior {
 		//VisualActionObserver observer = new VisualActionObserver(domain, GridWorldVisualizer.getVisualizer(gwdg.getMap()));
 		//observer.initGUI();
 		//env.addObservers(observer);
+	}
+	
+	private void prettyPrintMap(int[][] map) {		
+		System.out.println("Map: ");
+		System.out.println(Arrays.deepToString(map).replace('[', '{').replace(']', '}'));
+		
+//		String str = "";
+//		
+//		// Iterate map backwards format correctly.
+//		for(int i = 0; i < map.length ; i++) {
+//			String numbers = "";
+//			for(int j = map[i].length - 1; j >= 0 ; j--) {
+//				numbers += map[i][j] + ",";
+//			}
+//			// Trim off last comma.
+//			numbers = numbers.substring(0, numbers.length() - 1);
+//			// Close numbers array.
+//			numbers =  "{ " + numbers + " } ,";
+//			// Add array to 2D array array.
+//			str += numbers;
+//		}
+//		
+//		// Close 2D array.
+//		str = "{ " + str + " }";
+//		// Print map string.
+//		System.out.println(str);
 	}
 
 
